@@ -1,186 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Feliz 30 de Septiembre</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Segoe UI", cursive;
-            background: linear-gradient(135deg, #FFC0CB, #FF69B4); /* Fondo Rosado/Fucsia */
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 2.2rem;
-            margin-top: 50px;
-            font-weight: normal;
-            color: white;
-            font-family: "Segoe Script", cursive;
-        }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 10px; 
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        .gallery-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-            margin-left: -50px; 
-        }
-        .gallery img {
-            width: 220px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7); /* Sombra fucsia */
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.1);
-        }
-        /* CLASES PARA ROTAR CADA ELEMENTO INDIVIDUALMENTE (para efecto ramo) */
-        .carro-1 { transform: rotate(-8deg); }
-        .carro-2 { transform: rotate(4deg); margin-top: 20px; }
-        .carro-3 { transform: rotate(-5deg); margin-top: -10px; }
-        .carro-4 { transform: rotate(10deg); margin-top: 15px; }
+  <meta charset="UTF-8">
+  <title>Feliz 30 de Septiembre</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", cursive;
+      /* Fondo Negro a Rojo */
+      background: linear-gradient(135deg, #000, #400); 
+      color: white;
+      text-align: center;
+      /* Eliminamos 'overflow: hidden' para que funcione bien en móviles */
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-top: 50px;
+      font-weight: normal;
+      color: white;
+      font-family: "Segoe Script", cursive;
+    }
+    
+    /* ESTILO PARA SIMULAR EL PAPEL KRAFT O PAPEL DE RAMO */
+    .ramo-fondo {
+      display: inline-block;
+      padding: 50px 70px; /* Espacio alrededor del ramo */
+      background-color: #8B7355; /* Color marrón similar al papel kraft */
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      margin-top: 30px;
+      transform: rotate(2deg); /* Una leve rotación al papel completo */
+    }
 
-        /* ESTILO PARA SIMULAR EL PAPEL KRAFT O PAPEL DE RAMO */
-        .ramo-fondo {
-            display: inline-block;
-            padding: 50px 70px; /* Espacio alrededor del ramo */
-            background-color: #8B7355; /* Color marrón similar al papel kraft */
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 30px;
-            transform: rotate(2deg); 
-        }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px; 
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-left: -50px; /* CLAVE PARA EL EFECTO RAMO: Los superpone a la izquierda */
+    }
+    .gallery img {
+      width: 220px;
+      height: auto;
+      border-radius: 15px;
+      /* Sombra roja para simular luces */
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); 
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+    /* CLASES PARA ROTAR CADA ELEMENTO INDIVIDUALMENTE */
+    .carro-1 { transform: rotate(-8deg); }
+    .carro-2 { transform: rotate(4deg); margin-top: 20px; }
+    .carro-3 { transform: rotate(-5deg); margin-top: -10px; }
+    .carro-4 { transform: rotate(10deg); margin-top: 15px; }
 
-        /* ESTILO PARA EL EFECTO DE CONFETI/PARTÍCULAS (Girasoles) */
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; 
-            pointer-events: none;
-        }
-        .confetti img {
-            position: absolute;
-            width: 30px; /* Tamaño de la imagen del girasol */
-            height: 30px;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
+    /* ESTILO PARA EL EFECTO DE CONFETI/PARTÍCULAS (Brillo) */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Lo pone detrás de los carros */
+      pointer-events: none;
+    }
+    .confetti span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #ffcc00; /* Color amarillo/oro */
+      opacity: 0.8;
+      border-radius: 50%;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to { transform: translateY(100vh); }
+    }
+    /* FIN ESTILO CONFETI */
 
-        .heart-button {
-            display: inline-block;
-            font-size: 3rem;
-            color: red;
-            cursor: default;
-            margin-top: 30px;
-            animation: pulse 1.5s infinite;
-            text-decoration: none;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Estilo del botón de inicio si la música se bloquea */
-        #playButton {
-            position: fixed; 
-            top: 10px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            padding: 10px; 
-            background-color: #ff3366; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            z-index: 1000;
-        }
-    </style>
+    .heart-button {
+      display: inline-block;
+      font-size: 3rem;
+      color: red;
+      cursor: default;
+      margin-top: 30px;
+      animation: pulse 1.5s infinite;
+      text-decoration: none;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
 <body>
-    <button id="playButton" style="display: none;">apreta aquí</button>
+  <h1>𝓕𝓮𝓵𝓲𝔃 30 𝓭𝓮 𝓼𝓮𝓹𝓽𝓲𝓮𝓶𝓫𝓻𝓮 𝓓𝓲𝓮𝓰𝓸 ♥️</h1>
 
-    <h1>Feliz 30 de septiembre❤!</h1>
+  <div class="ramo-fondo">
+    <div class="gallery">
+      <div class="gallery-item carro-1">
+        <img src="./NOMBRE_DE_TU_IMAGEN_NUEVA_1.jpg"> 
+      </div>
 
-    <div class="ramo-fondo">
-        <div class="gallery">
-            <div class="gallery-item carro-1">
-                <img src="hotwheels1.jpg">
-            </div>
+      <div class="gallery-item carro-2">
+        <img src="./NOMBRE_DE_TU_IMAGEN_NUEVA_2.jpg">
+      </div>
 
-            <div class="gallery-item carro-2">
-                <img src="hotwheels2.jpg">
-            </div>
+      <div class="gallery-item carro-3">
+        <img src="./NOMBRE_DE_TU_IMAGEN_NUEVA_3.jpg">
+      </div>
 
-            <div class="gallery-item carro-3">
-                <img src="hotwheels3.jpg">
-            </div>
-
-            <div class="gallery-item carro-4">
-                <img src="hotwheels4.jpg">
-            </div>
-        </div>
+      <div class="gallery-item carro-4">
+        <img src="./NOMBRE_DE_TU_IMAGEN_NUEVA_4.jpg">
+      </div>
     </div>
+  </div>
 
-    <a href="#" class="heart-button">♥️</a>
+  <a href="#" class="heart-button">♥️</a>
 
-    <audio id="music" loop autoplay>
-        <source src="bensound-memories.mp3" type="audio/mp3">
-        Tu navegador no soporta la música.
-    </audio>
+  <audio id="music" loop autoplay>
+    <source src="https://baque2005.github.io/public-files/2025/09/bensound-memories.mp3" type="audio/mp3">
+    Tu navegador no soporta la música.
+  </audio>
 
-    <div class="confetti"></div>
+  <div class="confetti"></div>
 
-    <img id="confetti-image" src="girasol.png" style="display: none;">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const confettiContainer = document.querySelector('.confetti');
+      const music = document.getElementById('music');
+      
+      // Intentar reproducir la música (muchos navegadores lo bloquean hasta un clic)
+      music.play().catch(() => {
+        // Poner un botón para reproducir si falla el autoplay
+        const playButton = document.createElement('button');
+        playButton.textContent = 'Toca aquí para iniciar la sorpresa';
+        playButton.style.cssText = 'position: fixed; top: 10px; left: 50%; transform: translateX(-50%); padding: 10px; background-color: #ff3366; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 1000;';
+        document.body.appendChild(playButton);
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const confettiContainer = document.querySelector('.confetti');
-            const music = document.getElementById('music');
-            const confettiImageSrc = document.getElementById('confetti-image').src;
-            const playButton = document.getElementById('playButton');
-
-            // Función para iniciar la música y ocultar el botón
-            const startSurprise = () => {
-                music.play();
-                playButton.style.display = 'none';
-            };
-
-            // Intentar reproducir la música (muchos navegadores lo bloquean hasta un clic)
-            music.play().catch(() => {
-                // Si falla el autoplay, mostrar el botón de inicio
-                playButton.style.display = 'block';
-                playButton.addEventListener('click', startSurprise);
-            });
-
-            // Generador de partículas (Girasoles)
-            for (let i = 0; i < 50; i++) {
-                const img = document.createElement('img');
-                img.src = confettiImageSrc; // Usamos la imagen del girasol
-                img.alt = 'Fondo flor Girasol';
-                img.style.left = `${Math.random() * 100}vw`;
-                img.style.animationDuration = `${Math.random() * 3 + 2}s`; // 2 a 5 segundos
-                img.style.animationDelay = `${Math.random() * 5}s`;
-                img.style.transform = `translateY(-${Math.random() * 100}vh) rotate(${Math.random() * 360}deg)`;
-                confettiContainer.appendChild(img);
-            }
+        playButton.addEventListener('click', () => {
+          music.play();
+          playButton.remove();
         });
-    </script>
+      });
+
+      // Generador de partículas
+      for (let i = 0; i < 50; i++) {
+        const span = document.createElement('span');
+        span.style.left = `${Math.random() * 100}vw`;
+        span.style.animationDuration = `${Math.random() * 3 + 2}s`; // 2 a 5 segundos
+        span.style.animationDelay = `${Math.random() * 5}s`;
+        span.style.transform = `translateY(-${Math.random() * 100}vh)`;
+        confettiContainer.appendChild(span);
+      }
+    });
+  </script>
 </body>
 </html>
